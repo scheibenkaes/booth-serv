@@ -5,8 +5,8 @@
 
 (defroutes app-routes
   (GET "/" [] "Hello World")
-  (POST "/" [] (fn [_]
-                 (println "got a request")))
+  (POST "/" [] (fn [r]
+                 (prn-str r)))
   (route/resources "/")
   (route/not-found "Not Found"))
 
