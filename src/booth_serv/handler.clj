@@ -29,8 +29,8 @@
 (defn notify-client [client]
   (let [stream (.getOutputStream client)]
     (try
-      (.write stream (-> (java.util.Date.) .toString .getBytes)
-              )
+      (println "notifying clients")
+      (.write stream (-> (java.util.Date.) .toString .getBytes))
       (catch Exception e
         (println "Error while writing to a client. Closing it")
         (remove-client client)))))
