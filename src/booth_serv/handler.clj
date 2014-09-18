@@ -27,10 +27,11 @@
   (swap! connected-clients (flip remove) #(= client %)))
 
 (defn notify-client [client]
-  (let [stream (.getOutputStream client)]
+  (let [stream (.getOutputStream client)
+        msg (str (-> (java.util.Date.) .toString) \newline)]
     (try
       (println "notifying clients")
-      (.write stream (-> (java.util.Date.) .toString .getBytes))
+      (.write stream (.getBytes msg))
       (catch Exception e
         (println "Error while writing to a client. Closing it")
         (remove-client client)))))
